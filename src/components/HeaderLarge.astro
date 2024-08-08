@@ -1,0 +1,81 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  href: string;
+  img?: ImageMetadata;
+  alt?: string;
+  aos?: boolean;
+  buttonName?: string;
+}
+
+const {
+  title,
+  href,
+  buttonName = "Learn more",
+  img,
+  alt,
+  aos = false,
+} = Astro.props;
+---
+
+<header data-aos={aos ? "fade-down" : ""}>
+  <div
+    class="jumbotron jumbotron-lg jumbotron-fluid mb-0 pb-5 bg-dark position-relative"
+  >
+    <div class="container-fluid text-white h-100">
+      <div
+        class="d-lg-flex align-items-center justify-content-between text-center pl-lg-5"
+      >
+        <div class="col pt-4 pb-4">
+          <h1 class="display-3"><b>{title}</b></h1>
+          <h5 class="font-weight-light mb-4">
+            <slot />
+          </h5>
+          <a href={href} class="btn btn-lg btn-outline-white btn-round">
+            {buttonName}
+          </a>
+        </div>
+        {
+          img && (
+            <div class="col align-self-bottom align-items-right text-right img-box">
+              <Image
+                src={img}
+                alt={alt || ""}
+                width="600"
+                class="rounded img-fluid"
+              />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+  <svg
+    style="-webkit-transform:rotate(-180deg); -moz-transform:rotate(-180deg); -o-transform:rotate(-180deg); transform:rotate(-180deg); margin-top: -1px;"
+    version="1.1"
+    id="Layer_1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    x="0px"
+    y="0px"
+    viewBox="0 0 1440 126"
+    xml:space="preserve"
+  >
+    <path
+      class="bg-dark"
+      d="M685.6,38.8C418.7-11.1,170.2,9.9,0,30v96h1440V30C1252.7,52.2,1010,99.4,685.6,38.8z"
+    >
+    </path>
+  </svg>
+</header>
+<hr class="border-0 mt-5 mb-5" />
+
+<style>
+  .img-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
