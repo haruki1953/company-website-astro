@@ -3,4 +3,5 @@
     "editor.insertSpaces": true,
     "editor.suggest.insertMode": "replace",
     "editor.formatOnSave": true,
+    "liveServer.settings.port": 5502,
 }

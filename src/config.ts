@@ -1,1 +1,1 @@
-export const webName = 'AnonTokyo'
+export const webName = 'ANON TOKYO'

@@ -3,16 +3,16 @@ import { Image } from "astro:assets";
 
 interface Props {
   title: string;
-  href: string;
+  buttonLink?: string;
+  buttonName?: string;
   img?: ImageMetadata;
   alt?: string;
   aos?: boolean;
-  buttonName?: string;
 }
 
 const {
   title,
-  href,
+  buttonLink,
   buttonName = "Learn more",
   img,
   alt,
@@ -29,13 +29,20 @@ const {
         class="d-lg-flex align-items-center justify-content-between text-center pl-lg-5"
       >
         <div class="col pt-4 pb-4">
-          <h1 class="display-3"><b>{title}</b></h1>
+          <h1 class="display-4"><b>{title}</b></h1>
           <h5 class="font-weight-light mb-4">
             <slot />
           </h5>
-          <a href={href} class="btn btn-lg btn-outline-white btn-round">
-            {buttonName}
-          </a>
+          {
+            buttonLink && (
+              <a
+                href={buttonLink}
+                class="btn btn-lg btn-outline-white btn-round"
+              >
+                {buttonName}
+              </a>
+            )
+          }
         </div>
         {
           img && (

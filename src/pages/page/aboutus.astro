@@ -1,0 +1,47 @@
+---
+import { Image } from "astro:assets";
+import PageLayout from "@/layouts/PageLayout.astro";
+import anonImg from "@/assets/img/Snipaste_2024-08-08_19-28-09.png";
+---
+
+<PageLayout title="ANON TOKYO">
+  <div class="container pt-5 pb-5" data-aos="fade-up">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <article>
+          <h1>公司及创始人：</h1>
+          <p>
+            株式会社 ANON TOKYO 创立于2024年，主营业务为服装设计。
+            创办人为少女乐队 MyGO!!!!! 的吉他手，千早爱音。
+          </p>
+          <h3>发展历程</h3>
+          <p>
+            ANONTOKYO
+            原本是干早爱音为所在乐队所取的名称之一，可是被Rikki和爽世同学否决掉了。
+            随后作为 MyGO!!!!! 的LIVE专用演出服的品牌名称而被广为人知！
+          </p>
+          <p>2024年4月，株式会社 ANON TOKYO 宣布成立</p>
+          <figure class="text-center mt-4 mb-4 full-width" data-aos="fade-up">
+            <Image
+              src={anonImg}
+              width="300"
+              class="figure-img"
+              alt="ANON TOKYO 诞生的瞬间"
+            />
+            <figcaption class="figure-caption">
+              ANON TOKYO 诞生的瞬间
+            </figcaption>
+          </figure>
+          <h3>公司文化</h3>
+          <p>组一辈子乐队，做一辈子服装</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    article p {
+      font-size: 18px;
+    }
+  </style>
+</PageLayout>
