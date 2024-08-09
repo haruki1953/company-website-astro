@@ -1,0 +1,87 @@
+---
+import { getImage } from "astro:assets";
+import PageLayout from "@/layouts/PageLayout.astro";
+const imgAssets = await Astro.glob("../../assets/img/demo/*.jpg");
+const imgs = await Promise.all(
+  imgAssets.map(async (imgAssets) => {
+    return await getImage({
+      src: imgAssets.default,
+      format: "webp",
+      width: "600",
+    });
+  }),
+);
+---
+
+<PageLayout title="AnonTokyo | 照片墙">
+  <div class="container pt-5 pb-5" data-aos="fade-up">
+    <div class="gap-y card-container">
+      {
+        imgs.map((img) => (
+          <div class="card-item">
+            <img class="lazy-load" data-lazy-src={img.src} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .card-container {
+    margin: 10px 20px 10px 0;
+    column-count: 1;
+    column-gap: 20px;
+  }
+
+  .card-container .card-item {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    min-height: 200px;
+    /* 过渡动画 */
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+    /* 初始透明度为0 */
+  }
+
+  /* 图片加载完成后，显示过渡动画 */
+  .card-container .card-item.loaded {
+    opacity: 1;
+    /* 将透明度设为1，显示图片 */
+  }
+
+  .card-item img {
+    /* 图片填充整个容器 */
+    width: 100%;
+    /* 自动调整高度以保持比例 */
+    height: auto;
+    border-radius: 5px;
+  }
+
+  /* 媒体查询 */
+  @media (min-width: 1000px) {
+    .card-container {
+      column-count: 2;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .card-container {
+      column-count: 3;
+    }
+  }
+</style>
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", function () {
+    // 获取所有图片元素
+    var images = document.querySelectorAll(".card-container .card-item img");
+    // 遍历每个图片元素
+    images.forEach(function (image) {
+      // 当图片加载完成时
+      image.addEventListener("load", function () {
+        // 添加 loaded 类，以应用过渡动画
+        image.parentNode.classList.add("loaded");
+      });
+    });
+  });
+</script>
